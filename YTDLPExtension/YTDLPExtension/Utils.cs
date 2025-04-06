@@ -84,8 +84,21 @@ public class Utils {
         return details.ToArray();
     }
 
+    
+    public static async void DownloadVideo(string filename, string url, string format) {
 
-    public static async Task DownloadVideo(string filename, string url, string format) {
+        try {
+            await _DownloadVideo(filename, url, format);
+        }
+        catch (Exception e) {
+            Log(e.ToString(), MessageState.Error);
+        }
+    }
+
+    private static async Task _DownloadVideo(string filename, string url, string format) {
+        if (string.IsNullOrEmpty(filename)) {
+            filename = ExtensionSettings.Instance.YtdlpOutput.Value;
+        }
         var progressToast = new ToastContentBuilder()
             .AddText("Downloading Video")
             .AddVisualChild(new AdaptiveProgressBar {

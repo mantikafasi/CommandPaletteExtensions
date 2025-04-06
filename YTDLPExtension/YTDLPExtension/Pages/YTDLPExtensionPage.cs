@@ -19,7 +19,7 @@ internal sealed partial class YTDLPExtensionPage : DynamicListPage {
     public YTDLPExtensionPage() {
         Icon = IconHelpers.FromRelativePath("Assets\\StoreLogo.png");
         Title = "Command Palette YTDLP plugin";
-        Name = "Open";
+        Name = "Open";  
 
         _items = new List<IListItem> {
             new ListItem(new NoOpCommand()) { Title = "Please Enter a URL" }
@@ -80,7 +80,7 @@ internal sealed partial class YTDLPExtensionPage : DynamicListPage {
 
                             foreach (var format in res.Data.Formats)
                                 _items.Add(new ListItem(new AnonymousCommand(() => {
-                                    _ = Utils.DownloadVideo(_currentFileName, url, format.FormatId);
+                                    Utils.DownloadVideo(_currentFileName, url, format.FormatId);
                                 })) {
                                     Details = new Details {
                                         Title = res.Data.Title,
@@ -116,7 +116,7 @@ internal sealed partial class YTDLPExtensionPage : DynamicListPage {
 
             // maybe I should add details to this one aswell
             _items[0] = new ListItem(new AnonymousCommand(() => {
-                _ = Utils.DownloadVideo(_currentFileName, url, "bestvideo+bestaudio");
+                Utils.DownloadVideo(_currentFileName, url, "bestvideo+bestaudio");
                 RaiseItemsChanged(0);
             })) {
                 Title = "Best Video+Audio",
