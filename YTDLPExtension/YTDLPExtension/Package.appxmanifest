@@ -4,6 +4,7 @@
         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
         xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
         xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+        xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
         xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
         IgnorableNamespaces="uap uap3 rescap">
@@ -17,7 +18,7 @@
 
     <Properties>
         <DisplayName>YTDLP Extension</DisplayName>
-        <PublisherDisplayName>A Lone Developer</PublisherDisplayName>
+        <PublisherDisplayName>mantikafasi</PublisherDisplayName>
         <Logo>Assets\StoreLogo.png</Logo>
     </Properties>
 
@@ -44,12 +45,22 @@
                 <uap:SplashScreen Image="Assets\SplashScreen.png"/>
             </uap:VisualElements>
             <Extensions>
+                
+                <desktop:Extension Category="windows.toastNotificationActivation">
+                    <desktop:ToastNotificationActivation ToastActivatorCLSID="478d79ad-5707-4d02-a379-3e5ddf46524b" />
+                </desktop:Extension>
+
                 <com:Extension Category="windows.comServer">
                     <com:ComServer>
                         <com:ExeServer Executable="YTDLPExtension.exe" Arguments="-RegisterProcessAsComServer"
                                        DisplayName="YTDLP Extension">
                             <com:Class Id="3422a894-842e-41eb-a465-f9f42c304640" DisplayName="YTDLP Extension"/>
                         </com:ExeServer>
+                        
+                        <com:ExeServer Executable="YTDLPExtension.exe" DisplayName="YTDLPExtension" Arguments="-ToastActivated">
+                            <com:Class Id="478d79ad-5707-4d02-a379-3e5ddf46524b" />
+                        </com:ExeServer>
+
                     </com:ComServer>
                 </com:Extension>
                 <uap3:Extension Category="windows.appExtension">
