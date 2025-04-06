@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "YTDLPExtension (Package)": {
+      "commandName": "MsixPackage",
+      "doNotLaunchApp": true
+    },
+    "YTDLPExtension (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
