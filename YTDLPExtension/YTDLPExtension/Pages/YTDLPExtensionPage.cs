@@ -1,7 +1,3 @@
-// Copyright (c) Microsoft Corporation
-// The Microsoft Corporation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.
-
 using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 using YoutubeDLSharp.Options;
@@ -35,7 +31,7 @@ internal sealed partial class YTDLPExtensionPage : DynamicListPage {
 
         var url = query.Contains(' ') ? query.Split(" ")[0] : query;
 
-        // if url changed and previous task is running cancel it, so we can start new task
+        // if the url changed and the previous task is still running, cancel it so we can start a new task
         if (_currentUrl != url) {
             _cts.CancelAsync();
             _cts = new CancellationTokenSource();
@@ -66,10 +62,10 @@ internal sealed partial class YTDLPExtensionPage : DynamicListPage {
                         }
 
                         if (!res.Success || res.Data == null) {
-                            Utils.Log(string.Concat("error fetching video data: ",
+                            Utils.Log(string.Concat("Error fetching video data: ",
                                 string.Join("\n", res.ErrorOutput).AsSpan(0, 1000)));
                             _items[0] = new ListItem(new CopyTextCommand(string.Join("\n", res.ErrorOutput))) {
-                                Title = "Error fetching video data, click to copy error",
+                                Title = "Error fetching video data; click to copy error",
                                 Subtitle = string.Join("\n", res.ErrorOutput)
                             };
                         }
@@ -114,7 +110,7 @@ internal sealed partial class YTDLPExtensionPage : DynamicListPage {
                 _currentUrl = url;
             }
 
-            // maybe I should add details to this one aswell
+            // maybe I should add details to this one as well
             _items[0] = new ListItem(new AnonymousCommand(() => {
                 Utils.DownloadVideo(_currentFileName, url, "bestvideo+bestaudio");
                 RaiseItemsChanged(0);

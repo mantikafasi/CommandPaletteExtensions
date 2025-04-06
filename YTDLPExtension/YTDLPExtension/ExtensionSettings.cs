@@ -11,14 +11,7 @@ public class ExtensionSettings : JsonSettingsManager {
         "Output path",
         Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\VideoDownloads"
     );
-
-    public readonly TextSetting YtdlpArgs = new(
-        "ytdlpArgs",
-        "Arguments to yt-dlp",
-        "Arguments to yt-dlp",
-        "--no-warnings --no-check-certificate"
-    );
-
+    
     public readonly TextSetting YtdlpOutput = new(
         "ytdlpOutput",
         "Output template",
@@ -37,7 +30,6 @@ public class ExtensionSettings : JsonSettingsManager {
     public ExtensionSettings() {
         FilePath = SettingsJsonPath();
         Settings.Add(YtdlpPath);
-        Settings.Add(YtdlpArgs);
         Settings.Add(YtdlpOutput);
         Settings.Add(OutputPath);
         

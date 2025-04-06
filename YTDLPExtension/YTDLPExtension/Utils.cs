@@ -132,7 +132,7 @@ public class Utils {
 
         var video = await YTDLPExtension.YoutubeDl.RunVideoDownload(url, format, progress: progress,
             overrideOptions: new OptionSet {
-                Output = Path.Combine(ExtensionSettings.Instance.OutputPath.Value, output)
+                Output = Path.Combine(ExtensionSettings.Instance.OutputPath.Value!, output)
             }, output: new Progress<string>(s => { Log(s); }));
 
         if (video.Success) {
